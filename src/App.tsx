@@ -47,7 +47,12 @@ const App = () => {
             wallet={wallet}
           />
         case 'bridging':
-          return <Bridging client={client}/>
+          if (wallet === 'undefined') return <div>Connect wallet</div>
+          return <Bridging
+            client={client}
+            link={link}
+            wallet={wallet}
+          />
         default:
           return <Marketplace
             client={client}
@@ -65,11 +70,11 @@ const App = () => {
         Active wallet: {wallet}
       </div>
       <div>
-        ETH balance: {JSON.stringify(balance)}
+        ETH balance (in wei): {balance?.balance?.toString()}
       </div>
       <button onClick={() => setTab('marketplace')}>Marketplace</button>
       <button onClick={() => setTab('inventory')}>Inventory</button>
-      <button onClick={() => setTab('deposit_and_withdrawal')}>Deposit and withdrawal</button>
+      <button onClick={() => setTab('bridging')}>Deposit and withdrawal</button>
       <br/><br/><br/>
       {handleTabs()}
     </div>
