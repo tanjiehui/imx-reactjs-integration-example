@@ -1,6 +1,5 @@
-import { ImmutableXClient } from '@imtbl/imx-link-lib';
-import { Link } from '@imtbl/imx-link-sdk';
-import { ImmutableMethodResults, ERC721TokenType, ETHTokenType, ImmutableRollupStatus } from '@imtbl/imx-link-types';
+
+import { Link, ImmutableXClient, ImmutableMethodResults, ERC721TokenType, ETHTokenType, ImmutableRollupStatus  } from '@imtbl/imx-sdk';
 import { useEffect, useState } from 'react';
 require('dotenv').config();
 
