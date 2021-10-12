@@ -1,7 +1,5 @@
 import { ethers } from 'ethers';
-import { ImmutableXClient } from '@imtbl/imx-link-lib';
-import { Link } from '@imtbl/imx-link-sdk';
-import { ImmutableMethodResults, MintableERC721TokenType } from '@imtbl/imx-link-types';
+import { Link, ImmutableXClient, ImmutableMethodResults, ERC721TokenType } from '@imtbl/imx-sdk';
 import { useEffect, useState } from 'react';
 require('dotenv').config();
 
