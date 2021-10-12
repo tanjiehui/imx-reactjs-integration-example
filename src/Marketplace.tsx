@@ -1,6 +1,4 @@
-import { ImmutableXClient } from '@imtbl/imx-link-lib';
-import { Link } from '@imtbl/imx-link-sdk';
-import { ImmutableMethodResults, ImmutableOrderStatus } from '@imtbl/imx-link-types';
+import { Link, ImmutableXClient, ImmutableMethodResults, ImmutableOrderStatus} from '@imtbl/imx-sdk';
 import { useEffect, useState } from 'react';
 require('dotenv').config();
 
