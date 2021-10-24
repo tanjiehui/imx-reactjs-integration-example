@@ -16,7 +16,7 @@ const Marketplace = ({client, link}: MarketplaceProps) => {
   }, [])
 
   async function load(): Promise<void> {
-    setMarketplace(await client.getOrders({status: ImmutableOrderStatus.active}))
+    setMarketplace(await client.getOrders({status: ImmutableOrderStatus.active, user: '0xc120a52ad90bb926bafcdfc9161740dcf4a2cea1'}))
   };
 
   // buy an asset
