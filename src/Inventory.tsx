@@ -14,6 +14,8 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
   // minting
   const [mintTokenId, setMintTokenId] = useState('');
   const [mintBlueprint, setMintBlueprint] = useState('');
+  const [mintTokenIdv2, setMintTokenIdv2] = useState('');
+  const [mintBlueprintv2, setMintBlueprintv2] = useState('');
 
   // buying and selling
   const [sellAmount, setSellAmount] = useState('');
@@ -92,6 +94,51 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
     setInventory(await client.getAssets({user: wallet, sell_orders: true}))
   };
 
+async function mintv2() {
+    // initialise a client with the minter for your NFT smart contract
+    const provider = new ethers.providers.JsonRpcProvider(`https://eth-ropsten.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
+    const minterPrivateKey: string = process.env.REACT_APP_MINTER_PK ?? ''; // registered minter for your contract
+    const minter = new ethers.Wallet(minterPrivateKey).connect(provider);
+    const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? '';
+    const starkContractAddress: string = process.env.REACT_APP_ROPSTEN_STARK_CONTRACT_ADDRESS ?? '';
+    const registrationContractAddress: string = process.env.REACT_APP_ROPSTEN_REGISTRATION_ADDRESS ?? '';
+    const minterClient = await ImmutableXClient.build({
+        publicApiUrl,
+        signer: minter,
+        starkContractAddress,
+        registrationContractAddress,
+    })
+
+    // mint any number of NFTs to specified wallet address (must be registered on Immutable X first)
+    const token_address: string = process.env.REACT_APP_TOKEN_ADDRESS ?? ''; // contract registered by Immutable
+    const royaltyRecieverAddress: string = process.env.REACT_APP_ROYALTY_ADDRESS ?? '';
+    const tokenReceiverAddress: string = process.env.REACT_APP_TOKEN_RECEIVER_ADDRESS ?? '';
+    const result = await minterClient.mintV2([{
+           users: [{
+                     etherKey: tokenReceiverAddress.toLowerCase(),
+                     tokens: [{
+                                id: mintTokenIdv2,
+                                blueprint: mintBlueprintv2,
+                                // overriding royalties for specific token
+                                royalties: [{                                        
+                                        recipient: tokenReceiverAddress.toLowerCase(),
+                                        percentage: 3.5
+                                    }],
+                            }]
+                    }],
+                contractAddress: token_address.toLowerCase(),
+
+                // globally set royalties
+                royalties: [{
+                        recipient: tokenReceiverAddress.toLowerCase(),
+                        percentage: 4.0
+                    }]
+            }]
+    );
+    console.log(`Token minted: ${result}`);
+    setInventory(await client.getAssets({user: wallet, sell_orders: true}))
+  };
+
   return (
     <div>
       <div>
@@ -106,6 +153,19 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
           <input type="text" value={mintBlueprint} onChange={e => setMintBlueprint(e.target.value)} />
         </label>
         <button onClick={mint}>Mint</button>
+      </div>
+      <div>
+        MintV2 - with Royalties NFT:
+        <br/>
+        <label>
+          Token ID:
+          <input type="text" value={mintTokenIdv2} onChange={e => setMintTokenIdv2(e.target.value)} />
+        </label>
+        <label>
+          Blueprint:
+          <input type="text" value={mintBlueprintv2} onChange={e => setMintBlueprintv2(e.target.value)} />
+        </label>
+        <button onClick={mintv2}>MintV2</button>
       </div>
       <br/>
       <div>
