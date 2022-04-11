@@ -61,8 +61,14 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
   async function mint() {
     // initialise a client with the minter for your NFT smart contract
     const provider = new ethers.providers.JsonRpcProvider(`https://eth-ropsten.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
+    
+    /**
+    //if you want to mint on a back end server you can also provide the private key of your wallet directly to the minter. 
+    //Please note: you should never share your private key and so ensure this is only done on a server that is not accessible from the internet
     const minterPrivateKey: string = process.env.REACT_APP_MINTER_PK ?? ''; // registered minter for your contract
     const minter = new ethers.Wallet(minterPrivateKey).connect(provider);
+    **/
+    const minter = new ethers.providers.Web3Provider(window.ethereum).getSigner(); //get Signature from Metamask wallet
     const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? '';
     const starkContractAddress: string = process.env.REACT_APP_ROPSTEN_STARK_CONTRACT_ADDRESS ?? '';
     const registrationContractAddress: string = process.env.REACT_APP_ROPSTEN_REGISTRATION_ADDRESS ?? '';
@@ -97,8 +103,14 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
 async function mintv2() {
     // initialise a client with the minter for your NFT smart contract
     const provider = new ethers.providers.JsonRpcProvider(`https://eth-ropsten.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
+        
+    /**
+    //if you want to mint on a back end server you can also provide the private key of your wallet directly to the minter. 
+    //Please note: you should never share your private key and so ensure this is only done on a server that is not accessible from the internet
     const minterPrivateKey: string = process.env.REACT_APP_MINTER_PK ?? ''; // registered minter for your contract
     const minter = new ethers.Wallet(minterPrivateKey).connect(provider);
+    **/
+    const minter = new ethers.providers.Web3Provider(window.ethereum).getSigner(); //get Signature from Metamask wallet
     const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? '';
     const starkContractAddress: string = process.env.REACT_APP_ROPSTEN_STARK_CONTRACT_ADDRESS ?? '';
     const registrationContractAddress: string = process.env.REACT_APP_ROPSTEN_REGISTRATION_ADDRESS ?? '';
