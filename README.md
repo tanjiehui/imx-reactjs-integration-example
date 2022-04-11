@@ -24,6 +24,10 @@ If you want to maintain a state of the entire Immutable X ecosystem in a local d
 
 In the project directory, you can run:
 
+### `yarn install`
+
+This downloads and installs the required packages.
+
 ### `npx yarn start`
 
 Runs the app in the development mode.\
