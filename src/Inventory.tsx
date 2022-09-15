@@ -69,9 +69,9 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
     const minter = new ethers.Wallet(minterPrivateKey).connect(provider);
     **/
     const minter = new ethers.providers.Web3Provider(window.ethereum).getSigner(); //get Signature from Metamask wallet
-    const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? '';
-    const starkContractAddress: string = process.env.REACT_APP_ROPSTEN_STARK_CONTRACT_ADDRESS ?? '';
-    const registrationContractAddress: string = process.env.REACT_APP_ROPSTEN_REGISTRATION_ADDRESS ?? '';
+    const publicApiUrl: string = process.env.REACT_APP_SANDBOX_ENV_URL ?? '';
+    const starkContractAddress: string = process.env.REACT_APP_SANDBOX_STARK_CONTRACT_ADDRESS ?? '';
+    const registrationContractAddress: string = process.env.REACT_APP_SANDBOX_REGISTRATION_ADDRESS ?? '';
     const minterClient = await ImmutableXClient.build({
         publicApiUrl,
         signer: minter,
@@ -111,9 +111,9 @@ async function mintv2() {
     const minter = new ethers.Wallet(minterPrivateKey).connect(provider);
     **/
     const minter = new ethers.providers.Web3Provider(window.ethereum).getSigner(); //get Signature from Metamask wallet
-    const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? '';
-    const starkContractAddress: string = process.env.REACT_APP_ROPSTEN_STARK_CONTRACT_ADDRESS ?? '';
-    const registrationContractAddress: string = process.env.REACT_APP_ROPSTEN_REGISTRATION_ADDRESS ?? '';
+    const publicApiUrl: string = process.env.REACT_APP_SANDBOX_ENV_URL ?? '';
+    const starkContractAddress: string = process.env.REACT_APP_SANDBOX_STARK_CONTRACT_ADDRESS ?? '';
+    const registrationContractAddress: string = process.env.REACT_APP_SANDBOX_REGISTRATION_ADDRESS ?? '';
     const minterClient = await ImmutableXClient.build({
         publicApiUrl,
         signer: minter,
