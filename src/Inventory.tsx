@@ -60,7 +60,7 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
   // the minting function should be on your backend
   async function mint() {
     // initialise a client with the minter for your NFT smart contract
-    const provider = new ethers.providers.JsonRpcProvider(`https://eth-ropsten.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
+    const provider = new ethers.providers.JsonRpcProvider(`https://eth-goerli.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
     
     /**
     //if you want to mint on a back end server you can also provide the private key of your wallet directly to the minter. 
@@ -102,7 +102,7 @@ const Inventory = ({client, link, wallet}: InventoryProps) => {
 
 async function mintv2() {
     // initialise a client with the minter for your NFT smart contract
-    const provider = new ethers.providers.JsonRpcProvider(`https://eth-ropsten.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
+    const provider = new ethers.providers.JsonRpcProvider(`https://eth-goerli.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_API_KEY}`);
         
     /**
     //if you want to mint on a back end server you can also provide the private key of your wallet directly to the minter. 
