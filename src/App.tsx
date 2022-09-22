@@ -8,7 +8,7 @@ require('dotenv').config();
 
 const App = () => {
   // initialise Immutable X Link SDK
-  const link = new Link(process.env.REACT_APP_ROPSTEN_LINK_URL)
+  const link = new Link(process.env.REACT_APP_SANDBOX_LINK_URL)
   
   // general
   const [tab, setTab] = useState('marketplace');
@@ -23,7 +23,7 @@ const App = () => {
 
   // initialise an Immutable X Client to interact with apis more easily
   async function buildIMX() {
-    const publicApiUrl: string = process.env.REACT_APP_ROPSTEN_ENV_URL ?? '';
+    const publicApiUrl: string = process.env.REACT_APP_SANDBOX_ENV_URL ?? '';
     setClient(await ImmutableXClient.build({publicApiUrl}))
   }
 
